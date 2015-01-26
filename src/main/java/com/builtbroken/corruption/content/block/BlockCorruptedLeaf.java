@@ -8,10 +8,13 @@ import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * Created by robert on 1/26/2015.
@@ -30,6 +33,12 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {
 
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return Blocks.leaves.isOpaqueCube();
     }
 
     @Override
@@ -57,5 +66,12 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
         {
             super.dropBlockAsItem(world, x, y, z, stack);
         }
+    }
+
+    @Override
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
+        //TODO replace with corrupted sapling
+        return Item.getItemFromBlock(Blocks.sapling);
     }
 }

@@ -1,7 +1,9 @@
 package com.builtbroken.corruption.content.block;
 
 import com.builtbroken.corruption.Corruption;
+import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.jlib.data.Colors;
+import com.builtbroken.mc.lib.transform.vector.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -11,7 +13,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
@@ -40,10 +41,15 @@ public class BlockCorruption extends Block
         spreadCorruption(world, x, y, z, rand);
     }
 
-    @SideOnly(Side.CLIENT) @Override
-    public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int colorMultiplier(IBlockAccess world, int x, int y, int z)
     {
-        return Colors.PURPLE.toInt();
+        if(world instanceof World)
+        {
+            return Colors.getIntFromColor(CorruptionHandler.getCorruptionColor(((World)world).provider.dimensionId));
+        }
+        return Colors.CORRUPTION_PURPLE.toInt();
     }
 
     /**
@@ -57,15 +63,15 @@ public class BlockCorruption extends Block
     {
         if (!world.isRemote && !Corruption.disableSpread)
         {
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                int i1 = x + rand.nextInt(2) - 2;
-                int j1 = y + rand.nextInt(2) - 2;
-                int k1 = z + rand.nextInt(2) - 2;
+                int i1 = x + rand.nextInt(3) - 2;
+                int j1 = y + rand.nextInt(3) - 2;
+                int k1 = z + rand.nextInt(3) - 2;
 
-                Block block = world.getBlock(i1, j1 + 1, k1);
+                Block block = world.getBlock(i1, j1, k1);
 
-                if (block == Blocks.dirt)
+                if (block == Blocks.dirt || block == Blocks.netherrack)
                 {
                     world.setBlock(i1, j1, k1, Corruption.corruptedSoil);
                 }
