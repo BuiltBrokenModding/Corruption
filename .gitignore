@@ -1,0 +1,23 @@
+# intellij
+.idea
+out
+
+# eclipse
+.settings
+.project
+.classpath
+bin
+
+#gradle
+build
+.gradle
+run/*
+!run/schematics
+
+#other
+*.class
+*.jar
+*.swp
+hs_err_pid*
+*.iml
+run/

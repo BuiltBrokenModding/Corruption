@@ -1,0 +1,72 @@
+// this part adds in ForgeGradle
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' }
+}
+
+apply plugin: "forge"
+
+if (project.getProperty("bambooshortPlanName") == "BBM-Dev") {
+    group = "dev.builtbroken.corruption"
+    archivesBaseName = "Creations"
+} else {
+    group = "com.builtbroken.corruption"
+    archivesBaseName = "Creations"
+}
+
+println archivesBaseName 
+
+version = "${project.minecraft.version}-${config.version.mod.major}.${config.version.mod.minor}.${config.version.mod.revis}b"
+
+// This is used to set the local version
+if (project.hasProperty("bambooBuildNumber"))
+    version += project.bambooBuildNumber
+else
+    version += getDate()
+
+println "version = "+ version
+
+// add some stuff to the version
+// spit out the version for debugging sake
+logger.lifecycle ""+version
+version = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
+logger.lifecycle ""+version
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in text files, not binary ones.
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+
+        // replace version and MCVersion
+        // forge version is also accessible via project.minecraftforgeVersion
+        // it contains the full minecraft version, including buildNumber
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    // copy everything else, thats not text
+    from(sourceSets.main.resources.srcDirs) { exclude '**/*.info' }
+}
+
+dependencies {
+    compile 'com.google.gag:gag:1.0.1'
+    testCompile 'junit:junit:4.11'
+}
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
+}
