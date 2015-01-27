@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
@@ -58,11 +59,11 @@ public class Corruption extends AbstractMod
         disableBiomes = getConfig().getBoolean("DisableBiomeGeneration", "WorldGen", false, "Turns off world gen of biomes");
 
         //Blocks
-        corruptedSoil = getManager().newBlock(BlockCorruptedSoil.class);
-        corruptedGrass = getManager().newBlock(BlockCorruptedGrass.class);
-        corruptedStone = getManager().newBlock(BlockCorruptedStone.class);
-        corruptedLog = getManager().newBlock(BlockCorruptedLog.class);
-        corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class);
+        corruptedSoil = getManager().newBlock("CorruptedSoil", new BlockCorruption(Blocks.dirt), ItemBlockCorruption.class);
+        corruptedGrass = getManager().newBlock(BlockCorruptedGrass.class, ItemBlockCorruption.class);
+        corruptedStone = getManager().newBlock("CorruptedStone", new BlockCorruption(Blocks.stone), ItemBlockCorruption.class);
+        corruptedLog = getManager().newBlock(BlockCorruptedLog.class, ItemBlockCorruption.class);
+        corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class, ItemBlockCorruption.class);
 
         //Items
         corruptedApple = new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple");

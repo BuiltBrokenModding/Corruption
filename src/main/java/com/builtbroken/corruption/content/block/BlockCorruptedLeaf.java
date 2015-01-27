@@ -36,6 +36,13 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
     }
 
     @Override
+    public void updateTick(World world, int x, int y, int z, Random rand)
+    {
+        super.updateTick(world, x, y, z, rand);
+        BlockCorruption.spreadCorruption(world, x, y, z, rand);
+    }
+
+    @Override
     public boolean isOpaqueCube()
     {
         return Blocks.leaves.isOpaqueCube();
