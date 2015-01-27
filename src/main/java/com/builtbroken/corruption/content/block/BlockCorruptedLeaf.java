@@ -1,6 +1,7 @@
 package com.builtbroken.corruption.content.block;
 
 import com.builtbroken.corruption.Corruption;
+import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.jlib.data.Colors;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,7 +40,7 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
     public void updateTick(World world, int x, int y, int z, Random rand)
     {
         super.updateTick(world, x, y, z, rand);
-        BlockCorruption.spreadCorruption(world, x, y, z, rand);
+        CorruptionHandler.spreadCorruption(world, x, y, z, rand);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.builtbroken.corruption;
 
+import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.corruption.content.block.*;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
@@ -32,6 +33,9 @@ public class Corruption extends AbstractMod
 
     @SidedProxy(clientSide = "com.builtbroken.corruption.ClientProxy", serverSide = "com.builtbroken.corruption.CommonProxy")
     public static CommonProxy proxy;
+
+    @Mod.Instance(Corruption.DOMAIN)
+    public static Corruption instance;
 
     public static Block corruptedSoil;
     public static Block corruptedGrass;
@@ -73,6 +77,11 @@ public class Corruption extends AbstractMod
     public void init(FMLInitializationEvent event)
     {
         super.init(event);
+        CorruptionHandler.registerReplacementBlock(Blocks.grass, corruptedGrass);
+        CorruptionHandler.registerReplacementBlock(Blocks.dirt, corruptedSoil);
+        CorruptionHandler.registerReplacementBlock(Blocks.stone, corruptedStone);
+        CorruptionHandler.registerReplacementBlock(Blocks.log, corruptedLog);
+        CorruptionHandler.registerReplacementBlock(Blocks.leaves, corruptedLeaf);
     }
 
     @Mod.EventHandler
