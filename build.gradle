@@ -64,6 +64,13 @@ processResources {
     from(sourceSets.main.resources.srcDirs) { exclude '**/*.info' }
 }
 
+repositories {
+    maven {
+        name "BuiltBroken"
+        url "http://ci.builtbroken.com/maven/"
+    }
+}
+
 dependencies {
     compile 'com.google.gag:gag:1.0.1'
     testCompile 'junit:junit:4.11'
