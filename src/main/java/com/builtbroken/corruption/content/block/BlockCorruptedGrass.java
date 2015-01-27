@@ -2,15 +2,23 @@ package com.builtbroken.corruption.content.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
+
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 /**
  * Created by robert on 1/26/2015.
@@ -19,29 +27,7 @@ public class BlockCorruptedGrass extends BlockCorruption implements IGrowable
 {
     public BlockCorruptedGrass()
     {
-        super(Material.grass);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon(int side, int meta)
-    {
-        return Blocks.grass.getIcon(side, meta);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getBlockColor()
-    {
-        double d0 = 0.5D;
-        double d1 = 1.0D;
-        return ColorizerGrass.getGrassColor(d0, d1);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getRenderColor(int p_149741_1_)
-    {
-        return this.getBlockColor();
+        super(Blocks.grass);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.builtbroken.corruption;
 
+import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.corruption.content.block.*;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
@@ -9,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
@@ -31,6 +33,9 @@ public class Corruption extends AbstractMod
 
     @SidedProxy(clientSide = "com.builtbroken.corruption.ClientProxy", serverSide = "com.builtbroken.corruption.CommonProxy")
     public static CommonProxy proxy;
+
+    @Mod.Instance(Corruption.DOMAIN)
+    public static Corruption instance;
 
     public static Block corruptedSoil;
     public static Block corruptedGrass;
@@ -58,11 +63,11 @@ public class Corruption extends AbstractMod
         disableBiomes = getConfig().getBoolean("DisableBiomeGeneration", "WorldGen", false, "Turns off world gen of biomes");
 
         //Blocks
-        corruptedSoil = getManager().newBlock(BlockCorruptedSoil.class);
-        corruptedGrass = getManager().newBlock(BlockCorruptedGrass.class);
-        corruptedStone = getManager().newBlock(BlockCorruptedStone.class);
-        corruptedLog = getManager().newBlock(BlockCorruptedLog.class);
-        corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class);
+        corruptedSoil = getManager().newBlock("CorruptedSoil", new BlockCorruption(Blocks.dirt), ItemBlockCorruption.class);
+        corruptedGrass = getManager().newBlock(BlockCorruptedGrass.class, ItemBlockCorruption.class);
+        corruptedStone = getManager().newBlock("CorruptedStone", new BlockCorruption(Blocks.stone), ItemBlockCorruption.class);
+        corruptedLog = getManager().newBlock(BlockCorruptedLog.class, ItemBlockCorruption.class);
+        corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class, ItemBlockCorruption.class);
 
         //Items
         corruptedApple = new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple");
@@ -72,6 +77,11 @@ public class Corruption extends AbstractMod
     public void init(FMLInitializationEvent event)
     {
         super.init(event);
+        CorruptionHandler.registerReplacementBlock(Blocks.grass, corruptedGrass);
+        CorruptionHandler.registerReplacementBlock(Blocks.dirt, corruptedSoil);
+        CorruptionHandler.registerReplacementBlock(Blocks.stone, corruptedStone);
+        CorruptionHandler.registerReplacementBlock(Blocks.log, corruptedLog);
+        CorruptionHandler.registerReplacementBlock(Blocks.leaves, corruptedLeaf);
     }
 
     @Mod.EventHandler
