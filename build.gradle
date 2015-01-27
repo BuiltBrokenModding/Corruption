@@ -1,7 +1,7 @@
-// this part adds in ForgeGradle
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -11,9 +11,13 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
-    dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT' }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
 }
 
+
+apply from: './BuiltBrokenScripts/index.gradle'
 apply plugin: "forge"
 
 if (project.getProperty("bambooshortPlanName") == "BBM-Dev") {
@@ -36,11 +40,11 @@ else
 
 println "version = "+ version
 
-// add some stuff to the version
-// spit out the version for debugging sake
-logger.lifecycle ""+version
-version = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
-logger.lifecycle ""+version
+println "Current Minecraft version = " + minecraft.apiVersion
+
+def currentJvm = org.gradle.internal.jvm.Jvm.current()
+println "Current Java version = " + currentJvm
+
 
 processResources {
     inputs.property "version", project.version
