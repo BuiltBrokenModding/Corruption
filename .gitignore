@@ -21,3 +21,4 @@ run/*
 hs_err_pid*
 *.iml
 run/
+!gradle-wrapper.jar
