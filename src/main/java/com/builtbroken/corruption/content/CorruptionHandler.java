@@ -8,6 +8,7 @@ import com.builtbroken.mc.prefab.recipe.ItemStackWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -28,6 +29,7 @@ public class CorruptionHandler
     public int current_running_thread = 0;
 
     public static final CorruptionHandler INSTANCE = new CorruptionHandler();
+    public static final DamageSource THORN = new DamageSource("corrupted.thorn");
 
     static
     {
@@ -107,7 +109,7 @@ public class CorruptionHandler
     {
         if (!world.isRemote && !Corruption.disableSpread)
         {
-            if (rand.nextFloat() >= Corruption.corruptionSpreadChance)
+            if (rand.nextFloat() >= Corruption.corruptionSpreadChance )
             {
                 ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[rand.nextInt(ForgeDirection.VALID_DIRECTIONS.length - 1)];
                 Location location = new Location(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
@@ -120,6 +122,14 @@ public class CorruptionHandler
                         INSTANCE.current_running_thread++;
                         new ThreadCorruption(location).start();
                     }
+                }
+                else if(block == Blocks.water)
+                {
+                    location.setBlock(Corruption.corruptedWater, 0, 2);
+                }
+                else if(block == Blocks.flowing_water)
+                {
+                    location.setBlock(Blocks.air, 0, 3);
                 }
                 else if (replacementBlockMap.containsKey(block))
                 {
