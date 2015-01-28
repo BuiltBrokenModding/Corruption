@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -42,11 +43,13 @@ public class Corruption extends AbstractMod
     public static Block corruptedStone;
     public static Block corruptedLog;
     public static Block corruptedLeaf;
+    public static Block corruptedTallGrass;
 
     public static Item corruptedApple;
 
     public static boolean disableSpread = false;
     public static boolean disableBiomes = false;
+    public static float corruptionSpreadChance = 0.6f;
 
 
     public Corruption()
@@ -61,6 +64,7 @@ public class Corruption extends AbstractMod
         //Settings
         disableSpread = getConfig().getBoolean("DisableCorruptionSpread", "WorldGen", false, "Prevents corruption from spreading");
         disableBiomes = getConfig().getBoolean("DisableBiomeGeneration", "WorldGen", false, "Turns off world gen of biomes");
+        corruptionSpreadChance = getConfig().getFloat("SpreadChance", "Settings", corruptionSpreadChance, 0, 1, "Chance that corruption will spread, lower value equals more often");
 
         //Blocks
         corruptedSoil = getManager().newBlock("CorruptedSoil", new BlockCorruption(Blocks.dirt), ItemBlockCorruption.class);
@@ -68,6 +72,7 @@ public class Corruption extends AbstractMod
         corruptedStone = getManager().newBlock("CorruptedStone", new BlockCorruption(Blocks.stone), ItemBlockCorruption.class);
         corruptedLog = getManager().newBlock(BlockCorruptedLog.class, ItemBlockCorruption.class);
         corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class, ItemBlockCorruption.class);
+        corruptedTallGrass = getManager().newBlock(BlockCorruptedTallGrass.class, ItemBlockCorruption.class);
 
         //Items
         corruptedApple = new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple");
@@ -82,6 +87,7 @@ public class Corruption extends AbstractMod
         CorruptionHandler.registerReplacementBlock(Blocks.stone, corruptedStone);
         CorruptionHandler.registerReplacementBlock(Blocks.log, corruptedLog);
         CorruptionHandler.registerReplacementBlock(Blocks.leaves, corruptedLeaf);
+        CorruptionHandler.registerReplacementBlock(Blocks.tallgrass, corruptedTallGrass);
     }
 
     @Mod.EventHandler

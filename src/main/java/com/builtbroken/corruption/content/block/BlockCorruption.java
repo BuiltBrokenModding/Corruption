@@ -4,6 +4,7 @@ import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.core.Engine;
+import com.builtbroken.mc.lib.helper.MathUtility;
 import com.builtbroken.mc.lib.transform.vector.Location;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,8 +35,13 @@ public class BlockCorruption extends Block
     {
         super(block.getMaterial());
         this.blockToMimic = block;
-        this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabBlock);
+    }
+
+    @Override
+    public boolean getTickRandomly()
+    {
+        return true;
     }
 
     @SideOnly(Side.CLIENT)

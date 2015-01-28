@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,6 +26,7 @@ import static net.minecraftforge.common.util.ForgeDirection.UP;
  */
 public class BlockCorruptedGrass extends BlockCorruption implements IGrowable
 {
+
     public BlockCorruptedGrass()
     {
         super(Blocks.grass);

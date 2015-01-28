@@ -25,7 +25,7 @@ public class CorruptionHandler
     private static final HashMap<ItemStackWrapper, ItemStackWrapper> replacementItemMap = new HashMap();
 
     private static final int MAX_RUNNING_THREADS = 5;
-    public int current_running_thread = 5;
+    public int current_running_thread = 0;
 
     public static final CorruptionHandler INSTANCE = new CorruptionHandler();
 
@@ -36,11 +36,14 @@ public class CorruptionHandler
         setCorruptionColor(-1, Colors.BLACK.color());
     }
 
-    private CorruptionHandler(){}
+    private CorruptionHandler()
+    {
+    }
 
     /**
      * Sets the corruption color for a dim, most dims default to Corrupted purple
-     * @param dim - dim id to use to look up when in the world
+     *
+     * @param dim   - dim id to use to look up when in the world
      * @param color - color object, does not support alpha
      */
     public static void setCorruptionColor(int dim, Color color)
@@ -58,7 +61,7 @@ public class CorruptionHandler
             Corruption.instance.logger().error("A mod tried to register a replacement for the same block");
             return;
         }
-        if(original == null || replacement == null)
+        if (original == null || replacement == null)
         {
             Corruption.instance.logger().error("A mod tried to register a null replacement block");
             return;
@@ -68,6 +71,7 @@ public class CorruptionHandler
 
     /**
      * Adds an entry to replace one item with another when effected by corruption
+     *
      * @param original
      * @param replacement
      */
@@ -78,7 +82,7 @@ public class CorruptionHandler
             Corruption.instance.logger().error("A mod tried to register a replacement for the same item");
             return;
         }
-        if(original == null || replacement == null)
+        if (original == null || replacement == null)
         {
             Corruption.instance.logger().error("A mod tried to register a null replacement item");
             return;
@@ -103,25 +107,23 @@ public class CorruptionHandler
     {
         if (!world.isRemote && !Corruption.disableSpread)
         {
-            for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
+            if (rand.nextFloat() >= Corruption.corruptionSpreadChance)
             {
-                int i1 = x + dir.offsetX;
-                int j1 = y + dir.offsetY;
-                int k1 = z + dir.offsetZ;
+                ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[rand.nextInt(ForgeDirection.VALID_DIRECTIONS.length - 1)];
+                Location location = new Location(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+                Block block = location.getBlock();
 
-                Block block = world.getBlock(i1, j1, k1);
-
-                if(block == Blocks.leaves || block == Blocks.log)
+                if (block == Blocks.leaves || block == Blocks.log || block == Blocks.leaves2 || block == Blocks.log2)
                 {
-                    if(INSTANCE.current_running_thread < MAX_RUNNING_THREADS)
+                    if (INSTANCE.current_running_thread < MAX_RUNNING_THREADS)
                     {
                         INSTANCE.current_running_thread++;
-                        new ThreadCorruption(new Location(world, x, y, z)).start();
+                        new ThreadCorruption(location).start();
                     }
                 }
                 else if (replacementBlockMap.containsKey(block))
                 {
-                    world.setBlock(i1, j1, k1, replacementBlockMap.get(block), world.getBlockMetadata(x, y, z), 2);
+                    location.setBlock(replacementBlockMap.get(block), location.getBlockMetadata() , 2);
                 }
             }
         }
