@@ -4,6 +4,7 @@ import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.path.ThreadCorruption;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.lib.transform.vector.Location;
+import com.builtbroken.mc.lib.world.edit.BlockEdit;
 import com.builtbroken.mc.prefab.recipe.ItemStackWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -109,7 +110,7 @@ public class CorruptionHandler
     {
         if (!world.isRemote && !Corruption.disableSpread)
         {
-            if (rand.nextFloat() >= Corruption.corruptionSpreadChance )
+            if (rand.nextFloat() >= Corruption.corruptionSpreadChance)
             {
                 ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[rand.nextInt(ForgeDirection.VALID_DIRECTIONS.length - 1)];
                 Location location = new Location(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
@@ -123,19 +124,44 @@ public class CorruptionHandler
                         new ThreadCorruption(location).start();
                     }
                 }
-                else if(block == Blocks.water)
+                else
                 {
-                    location.setBlock(Corruption.corruptedWater, 0, 2);
-                }
-                else if(block == Blocks.flowing_water)
-                {
-                    location.setBlock(Blocks.air, 0, 3);
-                }
-                else if (replacementBlockMap.containsKey(block))
-                {
-                    location.setBlock(replacementBlockMap.get(block), location.getBlockMetadata() , 2);
+                    BlockEdit edit = getReplacementBlock(location, block);
+                    if(edit.hasChanged())
+                        edit.place();
                 }
             }
         }
+    }
+
+    public static BlockEdit getReplacementBlock(Location location, Block block)
+    {
+        BlockEdit edit = new BlockEdit(location);
+        if (block == Blocks.leaves)
+        {
+            edit.set(Corruption.corruptedLeaf, location.getBlockMetadata(), false, true);
+        }
+        else if (block == Blocks.log)
+        {
+            edit.set(Corruption.corruptedLog, location.getBlockMetadata(), false, true);
+        }
+        else if (block == Blocks.water)
+        {
+            edit.set(Corruption.corruptedWater, 0, false, true);
+        }
+        else if (block == Blocks.flowing_water)
+        {
+            edit.set(Blocks.air, 0, false, true);
+        }
+        else if (replacementBlockMap.containsKey(block))
+        {
+            edit.set(replacementBlockMap.get(block), location.getBlockMetadata(), false, true);
+        }
+        else
+        {
+            edit.set(block, location.getBlockMetadata(), false, true);
+        }
+
+        return edit;
     }
 }

@@ -1,10 +1,13 @@
 package com.builtbroken.corruption;
 
+import com.builtbroken.corruption.content.BlastCorruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.corruption.content.block.*;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
+import com.builtbroken.mc.lib.world.explosive.ExplosiveRegistry;
+import com.builtbroken.mc.prefab.explosive.Explosive;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -108,6 +111,9 @@ public class Corruption extends AbstractMod
     public void init(FMLInitializationEvent event)
     {
         super.init(event);
+
+        ExplosiveRegistry.registerExplosive(DOMAIN, "corruption", new Explosive("corruption", BlastCorruption.class));
+
         CorruptionHandler.registerReplacementBlock(Blocks.grass, corruptedGrass);
         CorruptionHandler.registerReplacementBlock(Blocks.dirt, corruptedSoil);
         CorruptionHandler.registerReplacementBlock(Blocks.sand, corruptedSand);
