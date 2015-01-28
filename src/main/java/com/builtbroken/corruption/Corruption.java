@@ -51,6 +51,7 @@ public class Corruption extends AbstractMod
     public static Block corruptedLeaf;
     public static Block corruptedTallGrass;
     public static Block corruptedWater;
+    public static Block corruptedVines;
 
     public static Item corruptedApple;
     public static Item corruptedWaterBucket;
@@ -94,6 +95,7 @@ public class Corruption extends AbstractMod
         corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class, ItemBlockCorruption.class);
         corruptedTallGrass = getManager().newBlock(BlockCorruptedTallGrass.class, ItemBlockCorruption.class);
         corruptedWater = getManager().newBlock(BlockCorruptedWater.class);
+        corruptedVines = getManager().newBlock(BlockCorruptedVines.class, ItemBlockCorruption.class);
 
         //Items
         corruptedApple = new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple");
@@ -113,6 +115,7 @@ public class Corruption extends AbstractMod
         CorruptionHandler.registerReplacementBlock(Blocks.log, corruptedLog);
         CorruptionHandler.registerReplacementBlock(Blocks.leaves, corruptedLeaf);
         CorruptionHandler.registerReplacementBlock(Blocks.tallgrass, corruptedTallGrass);
+        CorruptionHandler.registerReplacementBlock(Blocks.vine, corruptedVines);
     }
 
     @Mod.EventHandler

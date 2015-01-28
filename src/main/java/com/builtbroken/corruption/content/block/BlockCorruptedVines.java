@@ -5,8 +5,7 @@ import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.core.Engine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockFalling;
-import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockVine;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
@@ -18,7 +17,7 @@ import java.util.Random;
 /**
  * Created by robert on 1/28/2015.
  */
-public class BlockCorruptedSand extends BlockFalling
+public class BlockCorruptedVines extends BlockVine
 {
     @Override @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister p_149651_1_)
@@ -28,13 +27,7 @@ public class BlockCorruptedSand extends BlockFalling
     @Override @SideOnly(Side.CLIENT)
     public IIcon getIcon(int i, int j)
     {
-        return Blocks.sand.getIcon(i, j);
-    }
-
-    @Override
-    public int damageDropped(int meta)
-    {
-        return meta;
+        return Blocks.vine.getIcon(i, j);
     }
 
     @Override
