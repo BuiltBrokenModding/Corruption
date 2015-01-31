@@ -34,7 +34,7 @@ public class EntitySpore extends EntityProjectile
     protected void onImpactTile()
     {
         super.onImpactTile();
-        
+
     }
 
     @Override
