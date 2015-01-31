@@ -16,16 +16,36 @@ buildscript {
     }
 }
 
+ext.buildProps = file "build.properties"
+
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
 
 apply from: './BuiltBrokenScripts/index.gradle'
 apply plugin: "forge"
 
+ext.buildProps = file "build.properties"
+
+println "Current Minecraft version = " + minecraft.apiVersion
+
+def currentJvm = org.gradle.internal.jvm.Jvm.current()
+println "Current Java version = " + currentJvm
+
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
 if (project.getProperty("bambooshortPlanName") == "BBM-Dev") {
     group = "dev.builtbroken.corruption"
-    archivesBaseName = "Creations"
+    archivesBaseName = "Corruption"
 } else {
     group = "com.builtbroken.corruption"
-    archivesBaseName = "Creations"
+    archivesBaseName = "Corruption"
 }
 
 println archivesBaseName 
@@ -39,11 +59,6 @@ else
     version += getDate()
 
 println "version = "+ version
-
-println "Current Minecraft version = " + minecraft.apiVersion
-
-def currentJvm = org.gradle.internal.jvm.Jvm.current()
-println "Current Java version = " + currentJvm
 
 
 processResources {
