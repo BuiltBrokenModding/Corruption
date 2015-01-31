@@ -60,6 +60,18 @@ else
 
 println "version = "+ version
 
+minecraft {
+	replace "@MAJOR@", config.version.mod.major
+	replace "@MINOR@", config.version.mod.minor
+	replace "@REVIS@", config.version.mod.revis
+	
+	if (project.hasProperty("bambooBuildNumber")) {
+		replace "@BUILD@", project.bambooBuildNumber
+	}
+	else {
+		replace "@BUILD@", getDate()
+	}
+}
 
 processResources {
     inputs.property "version", project.version
@@ -77,19 +89,6 @@ processResources {
 
     // copy everything else, thats not text
     from(sourceSets.main.resources.srcDirs) { exclude '**/*.info' }
-}
-
-publishing {
-  publications {
-    myPublication(MavenPublication) {      
-      pom.withXml {
-        from components.java
-        asNode().appendNode('description', 'Created on ' + getDate())        
-        def deps = configurations.compile.allDependencies
-        def dep_node = asNode().appendNode('dependencies')
-      }
-    }
-  }
 }
 
 repositories {
