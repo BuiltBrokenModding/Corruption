@@ -1,8 +1,8 @@
 package com.builtbroken.corruption.content.item;
 
 import com.builtbroken.corruption.Corruption;
+import com.builtbroken.mc.core.content.entity.EntityExCreeper;
 import com.builtbroken.mc.lib.transform.vector.Location;
-import com.builtbroken.mc.prefab.entity.EntityCreeperEx;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public class ItemCreeperWand extends Item
     {
         if(!world.isRemote)
         {
-            EntityCreeperEx cex = new EntityCreeperEx(new Location(world, x, y, z), Corruption.corruption_ex, 2, null);
+            EntityExCreeper cex = new EntityExCreeper(new Location(world, x, y, z), Corruption.corruption_ex, 2, null);
             world.spawnEntityInWorld(cex);
         }
         return true;

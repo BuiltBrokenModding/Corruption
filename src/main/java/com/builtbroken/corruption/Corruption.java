@@ -7,6 +7,7 @@ import com.builtbroken.corruption.content.item.ItemCreeperWand;
 import com.builtbroken.mc.api.explosive.IExplosiveHandler;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
+import com.builtbroken.mc.lib.mod.ModCreativeTab;
 import com.builtbroken.mc.lib.world.explosive.ExplosiveRegistry;
 import com.builtbroken.mc.prefab.explosive.ExplosiveHandler;
 import cpw.mods.fml.common.Mod;
@@ -19,6 +20,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -70,6 +72,7 @@ public class Corruption extends AbstractMod
     public static boolean disableTallGrassThornDamage = true;
     public static float corruptionSpreadChance = 0.4f;
 
+    public static ModCreativeTab creativeTab;
 
     public Corruption()
     {
@@ -80,11 +83,16 @@ public class Corruption extends AbstractMod
     public void preInit(FMLPreInitializationEvent event)
     {
         super.preInit(event);
+        this.creativeTab = new ModCreativeTab(DOMAIN);
+        this.manager.setTab(creativeTab);
+
+        //Fluids
         if(!FluidRegistry.registerFluid(corruptedWater_fluid))
         {
             logger().error("Error registering corruption fluid, requesting fluid from register. This could cause rendering changes and errors with recipes.");
             corruptedWater_fluid = FluidRegistry.getFluid(CORRUPTED_FLUID_NAME);
         }
+
         //Settings
         disableSpread = getConfig().getBoolean("DisableCorruptionSpread", "WorldGen", false, "Prevents corruption from spreading");
         disableBiomes = getConfig().getBoolean("DisableBiomeGeneration", "WorldGen", false, "Turns off world gen of biomes");
@@ -106,6 +114,8 @@ public class Corruption extends AbstractMod
         corruptedApple = getManager().newItem("corruptedApple", new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple"));
         corruptedWaterBucket = getManager().newItem("corruptedWaterBucket", new ItemBucket(corruptedWater));
         itemCreeperWand = getManager().newItem(ItemCreeperWand.class);
+
+        creativeTab.itemStack = new ItemStack(corruptedGrass);
     }
 
     @Mod.EventHandler
