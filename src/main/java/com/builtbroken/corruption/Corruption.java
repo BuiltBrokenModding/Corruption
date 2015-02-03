@@ -3,19 +3,18 @@ package com.builtbroken.corruption;
 import com.builtbroken.corruption.content.BlastCorruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.corruption.content.block.*;
-import com.builtbroken.jlib.data.Colors;
+import com.builtbroken.corruption.content.item.ItemCreeperWand;
+import com.builtbroken.mc.api.explosive.IExplosiveHandler;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
 import com.builtbroken.mc.lib.world.explosive.ExplosiveRegistry;
-import com.builtbroken.mc.prefab.explosive.Explosive;
+import com.builtbroken.mc.prefab.explosive.ExplosiveHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
@@ -58,8 +57,11 @@ public class Corruption extends AbstractMod
 
     public static Item corruptedApple;
     public static Item corruptedWaterBucket;
+    public static Item itemCreeperWand;
 
     public static Fluid corruptedWater_fluid;
+
+    public static IExplosiveHandler corruption_ex;
 
     public static final String CORRUPTED_FLUID_NAME = "corruptedWater";
 
@@ -101,10 +103,9 @@ public class Corruption extends AbstractMod
         corruptedVines = getManager().newBlock(BlockCorruptedVines.class, ItemBlockCorruption.class);
 
         //Items
-        corruptedApple = new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple");
-        GameRegistry.registerItem(corruptedApple, "corruptedApple");
-        corruptedWaterBucket = new ItemBucket(corruptedWater);
-        GameRegistry.registerItem(corruptedWaterBucket, "corruptedWaterBucket");
+        corruptedApple = getManager().newItem("corruptedApple", new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple"));
+        corruptedWaterBucket = getManager().newItem("corruptedWaterBucket", new ItemBucket(corruptedWater));
+        itemCreeperWand = getManager().newItem(ItemCreeperWand.class);
     }
 
     @Mod.EventHandler
@@ -112,7 +113,8 @@ public class Corruption extends AbstractMod
     {
         super.init(event);
 
-        ExplosiveRegistry.registerExplosive(DOMAIN, "corruption", new Explosive("corruption", BlastCorruption.class));
+        corruption_ex = new ExplosiveHandler("corruption", BlastCorruption.class);
+        ExplosiveRegistry.registerExplosive(DOMAIN, "corruption", corruption_ex);
 
         CorruptionHandler.registerReplacementBlock(Blocks.grass, corruptedGrass);
         CorruptionHandler.registerReplacementBlock(Blocks.dirt, corruptedSoil);
