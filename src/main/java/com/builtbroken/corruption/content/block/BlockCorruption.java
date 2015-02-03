@@ -35,7 +35,7 @@ public class BlockCorruption extends Block
     {
         super(block.getMaterial());
         this.blockToMimic = block;
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(Corruption.creativeTab);
     }
 
     @Override

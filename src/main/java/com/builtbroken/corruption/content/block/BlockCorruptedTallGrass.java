@@ -22,6 +22,11 @@ import java.util.Random;
  */
 public class BlockCorruptedTallGrass extends BlockTallGrass
 {
+    public BlockCorruptedTallGrass()
+    {
+        this.setCreativeTab(Corruption.creativeTab);
+    }
+
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {

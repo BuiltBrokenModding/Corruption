@@ -1,7 +1,7 @@
 package com.builtbroken.corruption;
 
-import com.builtbroken.corruption.content.BlastCorruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
+import com.builtbroken.corruption.content.ExplosiveCorruption;
 import com.builtbroken.corruption.content.block.*;
 import com.builtbroken.corruption.content.item.ItemCreeperWand;
 import com.builtbroken.mc.api.explosive.IExplosiveHandler;
@@ -9,7 +9,6 @@ import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
 import com.builtbroken.mc.lib.mod.ModCreativeTab;
 import com.builtbroken.mc.lib.world.explosive.ExplosiveRegistry;
-import com.builtbroken.mc.prefab.explosive.ExplosiveHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -26,6 +25,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * Mod themed after terraria's corruption zones
+ *
  * @author Darkguardsman
  */
 @Mod(modid = Corruption.DOMAIN, name = "Corruption", version = Corruption.VERSION, dependencies = "required-after:VoltzEngine")
@@ -87,7 +87,7 @@ public class Corruption extends AbstractMod
         this.manager.setTab(creativeTab);
 
         //Fluids
-        if(!FluidRegistry.registerFluid(corruptedWater_fluid))
+        if (!FluidRegistry.registerFluid(corruptedWater_fluid))
         {
             logger().error("Error registering corruption fluid, requesting fluid from register. This could cause rendering changes and errors with recipes.");
             corruptedWater_fluid = FluidRegistry.getFluid(CORRUPTED_FLUID_NAME);
@@ -123,7 +123,7 @@ public class Corruption extends AbstractMod
     {
         super.init(event);
 
-        corruption_ex = new ExplosiveHandler("corruption", BlastCorruption.class);
+        corruption_ex = new ExplosiveCorruption();
         ExplosiveRegistry.registerExplosive(DOMAIN, "corruption", corruption_ex);
 
         CorruptionHandler.registerReplacementBlock(Blocks.grass, corruptedGrass);

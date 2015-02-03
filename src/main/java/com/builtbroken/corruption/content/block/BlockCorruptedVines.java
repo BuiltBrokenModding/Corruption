@@ -1,5 +1,6 @@
 package com.builtbroken.corruption.content.block;
 
+import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.core.Engine;
@@ -19,6 +20,11 @@ import java.util.Random;
  */
 public class BlockCorruptedVines extends BlockVine
 {
+    public BlockCorruptedVines()
+    {
+        this.setCreativeTab(Corruption.creativeTab);
+    }
+
     @Override @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {

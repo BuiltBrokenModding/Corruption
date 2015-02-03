@@ -22,6 +22,11 @@ import java.util.Random;
  */
 public class BlockCorruptedLeaf extends BlockOldLeaf
 {
+    public BlockCorruptedLeaf()
+    {
+        this.setCreativeTab(Corruption.creativeTab);
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int i, int j)

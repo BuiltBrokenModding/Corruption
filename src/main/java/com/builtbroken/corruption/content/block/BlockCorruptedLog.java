@@ -1,5 +1,6 @@
 package com.builtbroken.corruption.content.block;
 
+import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.core.Engine;
@@ -20,6 +21,11 @@ import java.util.Random;
  */
 public class BlockCorruptedLog extends BlockOldLog
 {
+    public BlockCorruptedLog()
+    {
+        this.setCreativeTab(Corruption.creativeTab);
+    }
+
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand)
     {
