@@ -23,6 +23,7 @@ public class BlockCorruptedVines extends BlockVine
     public BlockCorruptedVines()
     {
         this.setCreativeTab(Corruption.creativeTab);
+        this.setBlockName(Corruption.PREFIX + "vines");
     }
 
     @Override @SideOnly(Side.CLIENT)

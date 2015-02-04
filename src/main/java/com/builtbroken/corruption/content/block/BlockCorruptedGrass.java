@@ -1,5 +1,6 @@
 package com.builtbroken.corruption.content.block;
 
+import com.builtbroken.corruption.Corruption;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -30,6 +31,7 @@ public class BlockCorruptedGrass extends BlockCorruption implements IGrowable
     public BlockCorruptedGrass()
     {
         super(Blocks.grass);
+        this.setBlockName(Corruption.PREFIX + "grass");
     }
 
     @Override

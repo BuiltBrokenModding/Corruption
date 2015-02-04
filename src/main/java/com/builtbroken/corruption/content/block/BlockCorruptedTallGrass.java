@@ -25,6 +25,7 @@ public class BlockCorruptedTallGrass extends BlockTallGrass
     public BlockCorruptedTallGrass()
     {
         this.setCreativeTab(Corruption.creativeTab);
+        this.setBlockName(Corruption.PREFIX + "tallGrass");
     }
 
     @SideOnly(Side.CLIENT)

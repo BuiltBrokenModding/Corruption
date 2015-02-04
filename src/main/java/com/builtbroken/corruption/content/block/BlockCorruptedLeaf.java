@@ -25,6 +25,7 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
     public BlockCorruptedLeaf()
     {
         this.setCreativeTab(Corruption.creativeTab);
+        this.setBlockName(Corruption.PREFIX + "leaf");
     }
 
     @Override

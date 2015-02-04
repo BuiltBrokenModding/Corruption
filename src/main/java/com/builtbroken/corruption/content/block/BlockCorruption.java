@@ -88,12 +88,6 @@ public class BlockCorruption extends Block
     }
 
     @Override
-    public String getUnlocalizedName()
-    {
-        return blockToMimic != null ? blockToMimic.getUnlocalizedName() : super.getUnlocalizedName();
-    }
-
-    @Override
     public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
     {
         Block plant = plantable.getPlant(world, x, y + 1, z);

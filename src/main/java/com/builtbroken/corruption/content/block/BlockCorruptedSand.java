@@ -24,6 +24,7 @@ public class BlockCorruptedSand extends BlockFalling
     public BlockCorruptedSand()
     {
         this.setCreativeTab(Corruption.creativeTab);
+        this.setBlockName(Corruption.PREFIX + "sand");
     }
 
     @Override @SideOnly(Side.CLIENT)

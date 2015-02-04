@@ -24,6 +24,7 @@ public class BlockCorruptedLog extends BlockOldLog
     public BlockCorruptedLog()
     {
         this.setCreativeTab(Corruption.creativeTab);
+        this.setBlockName(Corruption.PREFIX + "log");
     }
 
     @Override
@@ -63,12 +64,6 @@ public class BlockCorruptedLog extends BlockOldLog
     public int getRenderColor(int i)
     {
         return this.getBlockColor();
-    }
-
-    @Override
-    public String getUnlocalizedName()
-    {
-        return Blocks.log.getUnlocalizedName();
     }
 
     @SideOnly(Side.CLIENT)

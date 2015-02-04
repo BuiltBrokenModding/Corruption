@@ -100,10 +100,10 @@ public class Corruption extends AbstractMod
         corruptionSpreadChance = getConfig().getFloat("SpreadChance", "Settings", corruptionSpreadChance, 0, 1, "Chance that corruption will spread, lower value equals more often");
 
         //Blocks
-        corruptedSoil = getManager().newBlock("CorruptedSoil", new BlockCorruption(Blocks.dirt), ItemBlockCorruption.class);
+        corruptedSoil = getManager().newBlock("CorruptedSoil", new BlockCorruption(Blocks.dirt), ItemBlockCorruption.class).setBlockName(PREFIX + "soil");
         corruptedSand = getManager().newBlock(BlockCorruptedSand.class, ItemBlockCorruption.class);
         corruptedGrass = getManager().newBlock(BlockCorruptedGrass.class, ItemBlockCorruption.class);
-        corruptedStone = getManager().newBlock("CorruptedStone", new BlockCorruption(Blocks.stone), ItemBlockCorruption.class);
+        corruptedStone = getManager().newBlock("CorruptedStone", new BlockCorruption(Blocks.stone), ItemBlockCorruption.class).setBlockName(PREFIX + "stone");
         corruptedLog = getManager().newBlock(BlockCorruptedLog.class, ItemBlockCorruption.class);
         corruptedLeaf = getManager().newBlock(BlockCorruptedLeaf.class, ItemBlockCorruption.class);
         corruptedTallGrass = getManager().newBlock(BlockCorruptedTallGrass.class, ItemBlockCorruption.class);
@@ -112,7 +112,7 @@ public class Corruption extends AbstractMod
 
         //Items
         corruptedApple = getManager().newItem("corruptedApple", new ItemFood(4, 0.3F, false).setUnlocalizedName("apple").setTextureName("apple"));
-        corruptedWaterBucket = getManager().newItem("corruptedWaterBucket", new ItemBucket(corruptedWater));
+        corruptedWaterBucket = getManager().newItem("corruptedWaterBucket", new ItemBucket(corruptedWater).setTextureName(PREFIX +"bucket.water"));
         itemCreeperWand = getManager().newItem(ItemCreeperWand.class);
 
         creativeTab.itemStack = new ItemStack(corruptedGrass);

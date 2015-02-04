@@ -1,3 +1,40 @@
 
+itemGroup.corruption=Corruption
 
+##Entities
 entity.corruption:creeper.name=Corrupted Creeper
+
+## Items
+item.corruption:creeperWand.name=Corruption Wand
+item.corruption:creeperWand.info.name=Spawns corrupted mobs
+item.corruption:corruptedWaterBucket.name=Corrupted Water
+item.corruption:corruptedApple.name=Corrupted Apple
+
+## Tiles
+tile.corruption:vines.0.name=Corrupted Vines
+
+tile.tallgrass.2.name=Corrupted Tall Grass
+tile.tallgrass.1.name=Corrupted Tall Grass
+
+tile.corruption:leaf.0.name=Corrupted Leaf
+tile.corruption:leaf.1.name=Corrupted Leaf
+tile.corruption:leaf.2.name=Corrupted Leaf
+tile.corruption:leaf.3.name=Corrupted Leaf
+
+tile.corruption:log.name=Corrupted Log
+tile.corruption:log.0.name=Corrupted Log
+tile.corruption:log.1.name=Corrupted Log
+tile.corruption:log.2.name=Corrupted Log
+tile.corruption:log.3.name=Corrupted Log
+
+tile.corruption:stone.name=Corrupted Stone
+tile.corruption:stone.0.name=Corrupted Stone
+
+tile.corruption:grass.name=Corrupted Grass
+tile.corruption:grass.0.name=Corrupted Grass
+
+tile.corruption:soil.name=Corrupted Soil
+tile.corruption:soil.0.name=Corrupted Soil
+
+tile.corruption:sand.name=Corrupted Soil
+tile.corruption:sand.0.name=Corrupted Soil
