@@ -40,13 +40,9 @@ buildProps.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
 
-if (project.getProperty("bambooshortPlanName") == "BBM-Dev") {
-    group = "dev.builtbroken.corruption"
-    archivesBaseName = "Corruption"
-} else {
-    group = "com.builtbroken.corruption"
-    archivesBaseName = "Corruption"
-}
+group = "com.builtbroken.corruption"
+archivesBaseName = "Corruption"
+
 
 println archivesBaseName 
 
