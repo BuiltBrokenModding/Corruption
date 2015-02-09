@@ -51,12 +51,26 @@ public class BlockCorruptedWater extends BlockFluidClassic
     {
         //Handle infinite source system similar to MC's water
         Block block = world.getBlock(x, y, z);
-        if(block == Blocks.water)
+        if (block == Blocks.water || block == Blocks.flowing_water)
         {
-            world.setBlock(x, y, z, this, 0, 2);
-            world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
+            if (world.getBlockMetadata(x, y, z) == 0 && world.rand.nextBoolean())
+            {
+                world.setBlock(x, y, z, this, 0, 2);
+                world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
+            }
         }
-        else if (block == this || block == Blocks.flowing_water)
+        else if (block == Blocks.lava || block == Blocks.flowing_lava)
+        {
+            if (world.getBlockMetadata(x, y, z) == 0)
+            {
+                world.setBlock(x, y, z, Blocks.stone, 0, 2);
+            }
+            else
+            {
+                world.setBlock(x, y, z, Blocks.cobblestone, 0, 2);
+            }
+        }
+        else if (block == this || block == Blocks.water)
         {
             int i = 0;
 
@@ -64,11 +78,14 @@ public class BlockCorruptedWater extends BlockFluidClassic
             for (ForgeDirection dir : dirs)
             {
                 block = world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-                if (this.isSourceBlock(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ))
+                if (block == Blocks.water || block == Blocks.flowing_water)
                 {
-                    i++;
+                    if(world.getBlockMetadata(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == 0)
+                    {
+                        i++;
+                    }
                 }
-                else if (block == Blocks.water && world.getBlockMetadata(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) <= 1)
+                else if (this.isSourceBlock(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ))
                 {
                     i++;
                 }

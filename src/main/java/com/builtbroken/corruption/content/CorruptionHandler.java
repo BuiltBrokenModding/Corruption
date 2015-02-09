@@ -145,13 +145,16 @@ public class CorruptionHandler
         {
             edit.set(Corruption.corruptedLog, location.getBlockMetadata(), false, true);
         }
-        else if (block == Blocks.water)
+        if(block == Blocks.water || block == Blocks.flowing_water)
         {
-            edit.set(Corruption.corruptedWater, 0, false, true);
-        }
-        else if (block == Blocks.flowing_water)
-        {
-            edit.set(Blocks.air, 0, false, true);
+            if(location.getBlockMetadata() == 0)
+            {
+                edit.set(Corruption.corruptedWater, 0, false, true);
+            }
+            else
+            {
+                edit.set(Blocks.air, 0, false, true);
+            }
         }
         else if (replacementBlockMap.containsKey(block))
         {
