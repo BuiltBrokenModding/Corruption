@@ -76,7 +76,7 @@ public class Corruption extends AbstractMod
 
     public Corruption()
     {
-        super(DOMAIN);
+        super(DOMAIN, "Corruption");
     }
 
     @Mod.EventHandler
