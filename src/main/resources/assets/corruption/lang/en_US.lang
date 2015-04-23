@@ -1,8 +1,11 @@
 
 itemGroup.corruption=Corruption
 
-##Entities
+## Entities
 entity.corruption:creeper.name=Corrupted Creeper
+
+## Explosives
+explosive.corruption:corruption.name=Corruption
 
 ## Items
 item.corruption:creeperWand.name=Corruption Wand
