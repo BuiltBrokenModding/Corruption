@@ -83,7 +83,7 @@ public class Corruption extends AbstractMod
     public void preInit(FMLPreInitializationEvent event)
     {
         super.preInit(event);
-        this.creativeTab = new ModCreativeTab(DOMAIN);
+        creativeTab = new ModCreativeTab(DOMAIN);
         this.manager.setTab(creativeTab);
 
         //Fluids

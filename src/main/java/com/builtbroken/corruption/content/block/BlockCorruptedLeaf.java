@@ -58,7 +58,7 @@ public class BlockCorruptedLeaf extends BlockOldLeaf
     @Override
     public String[] func_150125_e()
     {
-        return ((BlockOldLeaf) Blocks.leaves).field_150131_O;
+        return field_150131_O;
     }
 
     @Override

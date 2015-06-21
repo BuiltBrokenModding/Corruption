@@ -5,7 +5,7 @@ import com.builtbroken.corruption.content.path.ThreadCorruption;
 import com.builtbroken.jlib.data.Colors;
 import com.builtbroken.mc.lib.transform.vector.Location;
 import com.builtbroken.mc.lib.world.edit.BlockEdit;
-import com.builtbroken.mc.prefab.recipe.ItemStackWrapper;
+import com.builtbroken.mc.prefab.items.ItemStackWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
