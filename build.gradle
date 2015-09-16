@@ -31,7 +31,6 @@ apply plugin: 'curseforge'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'jacoco'
 apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScripts/buildScripts/scripts/forge/deps.gradle'
-ext.buildProps = file "build.properties"
 
 println "Current Minecraft version = " + minecraft.apiVersion
 
