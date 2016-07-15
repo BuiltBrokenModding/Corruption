@@ -21,9 +21,7 @@ plugins {
   id 'com.matthewprenger.cursegradle' version '1.0.1'
   id 'net.saliman.cobertura' version '2.2.5'
   id 'com.github.kt3k.coveralls' version '2.0.1'
-  id "com.github.johnrengelman.shadow" version "1.2.2"
 }
-
 
 apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScripts/buildScripts/index/index.gradle'
 apply plugin: 'forge'
@@ -32,12 +30,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'jacoco'
 apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScripts/buildScripts/scripts/forge/deps.gradle'
 
-println "Current Minecraft version = " + minecraft.apiVersion
-
-def currentJvm = org.gradle.internal.jvm.Jvm.current()
-println "Current Java version = " + currentJvm
-
-println archivesBaseName 
+//println "Current Minecraft version = " + minecraft.apiVersion
 
 minecraft {    
     replace "required-after:VoltzEngine", "required-after:VoltzEngine@[$voltz_engine_version,)"
