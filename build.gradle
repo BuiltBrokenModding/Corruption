@@ -31,6 +31,8 @@ apply plugin: 'jacoco'
 apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScripts/buildScripts/scripts/forge/deps.gradle'
 
 //println "Current Minecraft version = " + minecraft.apiVersion
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 minecraft {    
     replace "required-after:VoltzEngine", "required-after:VoltzEngine@[$voltz_engine_version,)"
