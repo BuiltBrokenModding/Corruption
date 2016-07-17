@@ -1,31 +1,38 @@
 package com.builtbroken.corruption.content;
 
 import com.builtbroken.corruption.Corruption;
-import com.builtbroken.mc.api.explosive.IExCreeperHandler;
+import com.builtbroken.mc.api.edit.IWorldChangeAction;
 import com.builtbroken.mc.api.event.TriggerCause;
+import com.builtbroken.mc.api.explosive.IExCreeperHandler;
 import com.builtbroken.mc.lib.transform.vector.Location;
 import com.builtbroken.mc.lib.world.edit.BlockEdit;
-import com.builtbroken.mc.lib.world.edit.IWorldChangeAction;
-import com.builtbroken.mc.prefab.explosive.ExplosiveHandler;
+import com.builtbroken.mc.prefab.explosive.AbstractExplosiveHandler;
 import com.builtbroken.mc.prefab.explosive.blast.BlastSimplePath;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-/**
+/** Explosive for spreading corruption in the world
  * Created by robert on 2/3/2015.
  */
-public class ExplosiveCorruption extends ExplosiveHandler implements IExCreeperHandler
+public class ExplosiveCorruption extends AbstractExplosiveHandler implements IExCreeperHandler
 {
     @SideOnly(Side.CLIENT)
     public static ResourceLocation corruption_creeper_texture;
 
     public ExplosiveCorruption()
     {
-        super("corruption", null, 2);
+        super("corruption");
+    }
+
+    @Override
+    protected double getYieldModifier(ItemStack stack)
+    {
+        return 2;
     }
 
     @Override
