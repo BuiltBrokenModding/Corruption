@@ -4,6 +4,7 @@ import com.builtbroken.corruption.Corruption;
 import com.builtbroken.mc.api.edit.IWorldChangeAction;
 import com.builtbroken.mc.api.event.TriggerCause;
 import com.builtbroken.mc.api.explosive.IExCreeperHandler;
+import com.builtbroken.mc.api.explosive.IExplosiveHandler;
 import com.builtbroken.mc.lib.transform.vector.Location;
 import com.builtbroken.mc.lib.world.edit.BlockEdit;
 import com.builtbroken.mc.prefab.explosive.AbstractExplosiveHandler;
@@ -38,7 +39,7 @@ public class ExplosiveCorruption extends AbstractExplosiveHandler implements IEx
     @Override
     public IWorldChangeAction createBlastForTrigger(World world, double x, double y, double z, TriggerCause triggerCause, double size, NBTTagCompound tag)
     {
-        return new BlastCorruption().setLocation(world, (int) x, (int) y, (int) z).setCause(triggerCause).setYield(size);
+        return new BlastCorruption(this).setLocation(world, (int) x, (int) y, (int) z).setCause(triggerCause).setYield(size);
     }
 
     @Override
@@ -62,6 +63,11 @@ public class ExplosiveCorruption extends AbstractExplosiveHandler implements IEx
      */
     public static class BlastCorruption extends BlastSimplePath
     {
+        public BlastCorruption(IExplosiveHandler handler)
+        {
+            super(handler);
+        }
+
         @Override
         public BlockEdit changeBlock(Location loc)
         {
