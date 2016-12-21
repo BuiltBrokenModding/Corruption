@@ -12,7 +12,6 @@ import com.builtbroken.mc.prefab.explosive.blast.BlastSimplePath;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -31,7 +30,7 @@ public class ExplosiveCorruption extends AbstractExplosiveHandler implements IEx
     }
 
     @Override
-    protected double getYieldModifier(ItemStack stack)
+    public double getYieldModifier()
     {
         return 2;
     }
