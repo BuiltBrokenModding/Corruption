@@ -1,6 +1,6 @@
 package com.builtbroken.corruption.content.path;
 
-import com.builtbroken.mc.lib.transform.vector.Location;
+import com.builtbroken.mc.imp.transform.vector.Location;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;

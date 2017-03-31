@@ -3,7 +3,7 @@ package com.builtbroken.corruption.content;
 import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.path.ThreadCorruption;
 import com.builtbroken.jlib.data.Colors;
-import com.builtbroken.mc.lib.transform.vector.Location;
+import com.builtbroken.mc.imp.transform.vector.Location;
 import com.builtbroken.mc.lib.world.edit.BlockEdit;
 import com.builtbroken.mc.prefab.items.ItemStackWrapper;
 import net.minecraft.block.Block;

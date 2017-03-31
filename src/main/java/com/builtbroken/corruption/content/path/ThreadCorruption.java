@@ -2,7 +2,7 @@ package com.builtbroken.corruption.content.path;
 
 import com.builtbroken.corruption.Corruption;
 import com.builtbroken.corruption.content.CorruptionHandler;
-import com.builtbroken.mc.lib.transform.vector.Location;
+import com.builtbroken.mc.imp.transform.vector.Location;
 import com.builtbroken.mc.lib.world.edit.BlockEdit;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
