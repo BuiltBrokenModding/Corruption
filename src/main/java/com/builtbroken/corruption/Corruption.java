@@ -28,7 +28,7 @@ import net.minecraftforge.fluids.FluidRegistry;
  *
  * @author Darkguardsman
  */
-@Mod(modid = Corruption.DOMAIN, name = "Corruption", version = Corruption.VERSION, dependencies = "required-after:VoltzEngine")
+@Mod(modid = Corruption.DOMAIN, name = "Corruption", version = Corruption.VERSION, dependencies = "required-after:voltzengine")
 public class Corruption extends AbstractMod
 {
 

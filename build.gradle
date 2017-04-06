@@ -34,8 +34,8 @@ apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScr
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-minecraft {    
-    replace "required-after:VoltzEngine", "required-after:VoltzEngine@[$voltz_engine_version,)"
+minecraft {
+    replace "required-after:voltzengine", "required-after:voltzengine@[$voltz_engine_version,)"
 }
 
 processResources {
